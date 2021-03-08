@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<context:component-scan base-package="com.aiur"></context:component-scan>
+
+	<!-- <bean id="dataSource" -->
+	<!-- class="org.apache.commons.dbcp.BasicDataSource"> -->
+	<!-- <property name="driverClassName" -->
+	<!-- value="com.mysql.jdbc.Driver"> -->
+	<!-- </property> -->
+	<!-- <property name="url" -->
+	<!-- value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF-8"> -->
+	<!-- </property> -->
+	<!-- <property name="username" value="root"></property> -->
+	<!-- <property name="password" value="root"></property> -->
+	<!-- </bean> -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="org.gjt.mm.mysql.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3366/studyyingyutest18?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="user" value="root" />
+		<property name="password" value="123456" />
+		<property name="initialPoolSize" value="1" />
+		<property name="minPoolSize" value="1" />
+		<property name="maxPoolSize" value="300" />
+		<property name="maxIdleTime" value="60" />
+		<property name="acquireIncrement" value="5" />
+		<property name="idleConnectionTestPeriod" value="60" />
+	</bean>
+	
+	<!-- <bean id="dataSource"
+		  class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass"><value>oracle.jdbc.driver.OracleDriver</value></property>
+		<property name="jdbcUrl"><value>jdbc:oracle:thin:@localhost:1521:orcl</value></property>
+		<property name="user"><value>importedauto</value></property>
+		<property name="password"><value>importedauto</value></property>
+		<property name="minPoolSize"><value>1</value></property>
+		<property name="maxPoolSize"><value>50</value></property>
+		<property name="maxIdleTime"><value>1800</value></property>
+		<property name="acquireIncrement"><value>2</value></property>
+		<property name="maxStatements"><value>0</value></property>
+		<property name="initialPoolSize"><value>5</value></property>
+		<property name="idleConnectionTestPeriod"><value>1800</value></property>
+		<property name="acquireRetryAttempts"><value>30</value></property>
+		<property name="breakAfterAcquireFailure"><value>true</value></property>
+		<property name="testConnectionOnCheckout"><value>false</value></property>
+	</bean> -->
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				
+				<value>com/aiur/model/Good.hbm.xml</value>
+				<value>com/aiur/model/User.hbm.xml</value>
+				<value>com/aiur/model/Type.hbm.xml</value>
+
+				<value>com/aiur/model/Replay.hbm.xml</value>
+				<value>com/aiur/model/Notice.hbm.xml</value>
+
+
+				<value>com/aiur/model/Tousu.hbm.xml</value>
+				<value>com/aiur/model/Posts.hbm.xml</value>
+	
+				<value>com/aiur/model/Choose.hbm.xml</value>
+
+				<value>com/aiur/model/Shijuan.hbm.xml</value>
+				<value>com/aiur/model/Rizhi.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+				hibernate.hbm2ddl.auto=update
+				hibernate.show_sql=true
+				hibernate.format_sql=false
+			</value>
+		</property>
+	</bean>
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!--使用基于注解方式配置事务 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+</beans>
+

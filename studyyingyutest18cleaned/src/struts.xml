@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   <constant name="struts.ui.theme" value="simple" />
+   <constant name="struts.objectFactory" value="spring" />
+   <constant name="struts.devMode" value="true"></constant>
+   <constant name="struts.multipart.maxSize" value="900000000"></constant>
+   <package name="default" extends="struts-default">
+   		<action name="Index" class="com.aiur.action.IndexAction" method="index">
+   			<result name="login">/web/pages/Index/login.jsp</result>
+        	<result name="index">/web/pages/Index/index.jsp</result>
+   		</action>
+   		<action name="User" class="com.aiur.action.UserAction">
+   			<result name="success">/web/pages/User/user.jsp</result>
+   			<result name="login">/web/pages/Index/login.jsp</result>
+        	<result name="index">/web/pages/Index/index.jsp</result>
+   		</action>
+		<action name="Good" class="com.aiur.action.GoodAction">
+   			<result name="success">/web/pages/Good/good.jsp</result>
+            <result name="goodshop">/web/pages/Good/goodshop.jsp</result>
+   			<result name="type">/web/pages/Good/type.jsp</result>
+   		</action>
+   		<action name="Choose" class="com.aiur.action.ChooseAction">
+   			<result name="success">/web/pages/Choose/choose.jsp</result>
+   			<result name="choose2">/web/pages/Choose/choose2.jsp</result>
+   			<result name="choose3">/web/pages/Choose/choose3.jsp</result>
+   		</action>
+   		<action name="Video" class="com.aiur.action.VideoAction">
+   			<result name="success">/web/pages/Video/video.jsp</result>
+   		</action>
+   		<action name="Shijuan" class="com.aiur.action.ShijuanAction">
+   			<result name="success">/web/pages/Shijuan/shijuan.jsp</result>
+   		</action>
+   		<action name="Bill" class="com.aiur.action.BillAction">
+   			<result name="success">/web/pages/Bill/bill.jsp</result>
+   		</action>
+   		<action name="Rizhi" class="com.aiur.action.RizhiAction">
+   			<result name="success">/web/pages/Rizhi/rizhi.jsp</result>
+   		</action>
+   		<action name="Replay" class="com.aiur.action.ReplayAction">
+   			<result name="success">/web/pages/Replay/replay.jsp</result>
+   		</action>
+   		<action name="Notice" class="com.aiur.action.NoticeAction">
+   			<result name="success">/web/pages/Notice/notice.jsp</result>
+   		</action>
+   		<action name="Vip" class="com.aiur.action.VipAction">
+   			<result name="success">/web/pages/Vip/vip.jsp</result>
+   		</action>
+   		<action name="Shop" class="com.aiur.action.ShopAction">
+   			<result name="success">/web/pages/Shop/shop.jsp</result>
+   		</action>
+   		<action name="Dingzuo" class="com.aiur.action.DingzuoAction">
+   			<result name="success">/web/pages/Dingzuo/dingzuo.jsp</result>
+   		</action>
+   		<action name="Tousu" class="com.aiur.action.TousuAction">
+   			<result name="success">/web/pages/Tousu/tousu.jsp</result>
+   		</action>
+   		<action name="Wehall" class="com.aiur.action.WehallAction">
+   			<result name="success">/web/pages/Wehall/wehall.jsp</result>
+   		</action>
+   		<action name="Wechat" class="com.aiur.action.WechatAction" method="wechat">
+   		</action>
+   		<action name="Posts" class="com.aiur.action.PostsAction">
+   			<result name="success">/web/pages/Posts/posts.jsp</result>
+   		</action>
+   		<action name="Pdt" class="com.aiur.action.PdtAction">
+   			<result name="success">/web/pages/Pdt/pdt.jsp</result>
+   		</action>
+		<action name="Room" class="com.aiur.action.RoomAction">
+   			<result name="success">/web/pages/Room/room.jsp</result>
+   		</action>
+         <action name="Upload" class="com.aiur.util.UploadAction" method="upload">
+   			
+         </action>
+         <action name="download" class="com.aiur.util.DownloadAction"> 
+       		<result type="stream"> 
+ 				<param name="contentType">application/octet-stream</param> 
+ 				<param name="inputName">inputStream</param> 
+ 				<param name="contentDisposition">attachment;filename="${fileName}"</param> 
+ 				<param name="bufferSize">4096</param> 
+       		</result> 
+    	</action>		
+   </package>
+</struts>
